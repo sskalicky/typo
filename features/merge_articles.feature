@@ -17,10 +17,17 @@ Feature: Merge articles
 
     #And I am logged into the admin panel
 
+  Scenario: An admin user can merge articles
+    Given  I am on the edit page for "Article1"
+    And I am logged into the admin panel
+    And show me the page
+    Then I should see "Merge Articles"
+
   Scenario: A non-admin cannot merge articles
     Given  I am on the edit page for "Article1"
-    When I am not logged into the admin panel
-    Then I should not see "Merge" Button
+    When I am logged as non-admin user "vasek" with password "vasek"
+    And show me the page
+    Then I should not see "Merge Articles"
 
   Scenario: When articles are merged, the merged article should contain the text of both previous articles
 
