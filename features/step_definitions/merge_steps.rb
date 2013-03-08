@@ -15,3 +15,9 @@ When /^I am logged as non-admin user "(.*)" with password "(.*)"$/ do |user_name
     assert page.has_content?('Login successful')
   end
 end
+
+Given /^I have merged "(.*?)" with "(.*?)"$/ do |article_1, article_2|
+  fill_in 'merge_with', :with => Article.find_by_title(article_2).id.to_s
+  click_button 'Merge'
+end
+

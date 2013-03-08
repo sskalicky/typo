@@ -4,4 +4,4 @@
   <%= render :partial => "form" %>
 
 <% end %>
-<%= render :partial => "merge_articles" if @current_user.profile_id == 1%>
+<%= render :partial => "merge_articles" if @current_user.profile_id == 1 && controller.controller_name == 'content' && controller.action_name == 'edit'%>
