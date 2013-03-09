@@ -1,9 +1,9 @@
 <div class=''>
-  <%= form_tag :action=> "merge" do %>
   <h4><%= _("Merge Articles") %></h4>
+  <%= form_tag :action=> "merge", :src_article_id => @article.id do %>
   <label for="article_id"><%= _("Article ID")%></label>
   <div class='input'>
-    <%= text_field 'merge_with', 'article_id', :name => 'merge_with' %>
+    <%= text_field 'merged_article', 'id', :name => 'merge_with' %>
   </div>
   <input type="submit" name="merge" class="btn" value= "<%= _('Merge') %>" />
 	<% end %>

@@ -546,6 +546,10 @@ describe Admin::ContentController do
       end
     end
 
+    describe 'merge action' do
+
+    end
+
     describe 'resource_add action' do
 
       it 'should add resource' do

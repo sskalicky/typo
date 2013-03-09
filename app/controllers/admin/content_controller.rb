@@ -37,6 +37,34 @@ class Admin::ContentController < Admin::BaseController
     new_or_edit
   end
 
+  def merge
+    @src_article_id = params[:src_article_id]
+    @merged_article_id = params[:merge_with]
+
+    begin
+      @new_article = Article.find(@src_article_id).merge_with_article(@merged_article_id)
+
+      if @new_article.save
+        @feedbacks = Feedback.where(:article_id => [@src_article_id, @merged_article_id])
+        @feedbacks.each do |feedback|
+          feedback.article_id = @new_article.id
+          feedback.save
+        end
+
+        Article.destroy_all(:id => [@src_article_id, @merged_article_id])
+        flash[:notice] = _("Articles #{@src_article_id} and #{@merged_article_id} merged successfully.")
+
+        redirect_to :action => 'index'
+        return
+      end
+    rescue
+      flash[:error] = _("Article requsted to merge not found!")
+      redirect_to :action => 'index'
+      return
+    end
+
+  end
+
   def destroy
     @record = Article.find(params[:id])
 
