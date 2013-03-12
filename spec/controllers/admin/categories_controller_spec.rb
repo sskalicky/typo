@@ -16,6 +16,16 @@ describe Admin::CategoriesController do
     assert_response :redirect, :action => 'index'
   end
 
+  it 'should redirect to action new from index action' do
+    get :index
+    response.should redirect_to(:controller => 'admin/categories', :action => 'new')
+  end
+
+  it 'should render template new' do
+    get :new
+    response.should render_template('new')
+  end
+
   describe "test_edit" do
     before(:each) do
       get :edit, :id => Factory(:category).id
