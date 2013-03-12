@@ -31,6 +31,7 @@ Feature: Merge articles
     Given I am on the edit page for "Article1"
     And I am logged into the admin panel
     And I have merged "Article1" with "Article2"
+    When I go to the edit page for "Article1"
     Then I should see "article1 body"
     And I should see "article2 body"
 
